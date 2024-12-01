@@ -110,3 +110,20 @@ In Kubernetes, deploying applications is a fundamental skill that every beginner
 ## Deployment in kubernetes
 
  Deployment in kubernetes is a declarative approach to managing and scaling applications. It provides a blueprint for the desired state of the application, allowing Kubernetes to handle the complexities of deploying and managing replicas. Whether it is running a simple web server or a more complex microservices architecture, Deployments are the cornerstone for maintaining application consistency and availability.
+
+## Services in kubernetes
+
+In Kubernetes, a Service is an abstraction that defines a logical set of Pods and a policy by which to access them. It acts as a stable endpoint to connect to the application, allowing for easy communication within the cluster or from external sources. Some of the several types of Services in Kubernetes;
+
+- ClusterIp
+  The default type. Exposes the Service on a cluster-internal IP. Accessible only within the cluster.
+
+- NodePort
+   Exposes the Service on each Node's IP at a static port (NodePort). Accessible externally using `NodeIP`
+
+- Loadbalancer
+   Exposes the Service externally using a cloud provider's load balancer. Accessible externally through the load balancer's IP.
+
+## Deploying a Minicube sample applicaton using YAML
+
+Lets create a Minikube deployment and service using `kubectl`
