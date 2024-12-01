@@ -127,3 +127,27 @@ In Kubernetes, a Service is an abstraction that defines a logical set of Pods an
 ## Deploying a Minicube sample applicaton using YAML
 
 Lets create a Minikube deployment and service using `kubectl`
+
+```bash
+kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+```
+
+The command above creates a Kubernetes Deployment named "hello-minikube" running the "kicbase/echo-server:1.0" container image
+
+```bash
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+```
+
+The command above exposes the Kubernetes Deployment named "hello-minikube" as a NodePort service on port 8080
+
+```bash
+kubectl get services hello-minikube
+
+```
+
+The easiest way to access this service is to let minikube launch a web browser for you
+
+## Working with YAML file
+
+
