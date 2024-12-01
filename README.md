@@ -18,3 +18,40 @@ key3:
   - item2
 
 ```
+
+## Data types
+
+**Scalars:** Scalars are single value
+
+- strings
+
+```yaml
+name: John Doe
+
+```
+
+- numbers
+
+```yaml
+age: 25
+
+```
+
+- Booleans
+
+```yaml
+is_student: true
+
+```
+
+**Collections**
+
+- Lists(Arrays)
+
+```yml
+fruits:
+  - apple
+  - banana
+  - orange
+
+```
