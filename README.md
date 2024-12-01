@@ -44,7 +44,7 @@ is_student: true
 
 ```
 
-**Collections**
+**Collections:**
 
 - Lists(Arrays)
 
@@ -55,3 +55,58 @@ fruits:
   - orange
 
 ```
+
+**Maps(key-value pairs):**
+
+```yml
+person:
+  name: Alice
+  age: 30
+
+```
+
+**Nested strucutures:**
+
+```yml
+employee:
+  name: John Doe
+  position: developer
+  skills:
+    - Python
+    - JavaScript
+
+```
+
+**Comments:**
+
+```yml
+# This is a comment
+key: value
+
+```
+
+**Multi strings:**
+
+```yml
+description: |
+  This is a multiline
+  string in YAML.
+
+```
+
+**Anchor and aliases:**
+
+```yml
+
+first: &name John
+second: *name
+
+```
+
+## Deploying application in kubernetes
+
+In Kubernetes, deploying applications is a fundamental skill that every beginner needs to grasp. Deployment involves the process of taking your application code and running it on a Kubernetes cluster, ensuring that it scales, manages resources efficiently, and stays resilient. This hands-on project will give an insight to deploying application using Minikube, a lightweight, single-node Kubernetes cluster perfect for beginners.
+
+## Deployment in kubernetes
+
+ Deployment in kubernetes is a declarative approach to managing and scaling applications. It provides a blueprint for the desired state of the application, allowing Kubernetes to handle the complexities of deploying and managing replicas. Whether it is running a simple web server or a more complex microservices architecture, Deployments are the cornerstone for maintaining application consistency and availability.
