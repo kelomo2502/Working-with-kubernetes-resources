@@ -124,7 +124,7 @@ In Kubernetes, a Service is an abstraction that defines a logical set of Pods an
 - Loadbalancer
    Exposes the Service externally using a cloud provider's load balancer. Accessible externally through the load balancer's IP.
 
-## Deploying a Minicube sample applicaton using YAML
+## Deploying a Minikube sample applicaton using YAML
 
 Lets create a Minikube deployment and service using `kubectl`
 
@@ -147,7 +147,94 @@ kubectl get services hello-minikube
 ```
 
 The easiest way to access this service is to let minikube launch a web browser for you
+`minikube service hello-minikube`
 
 ## Working with YAML file
 
+  1. Create a folder `my-nginx-yaml`
+  2. Create a file `nginx-deployment-yaml`
 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: kelomo2502/gbnginx:1.0
+        ports:
+        - containerPort: 80
+
+
+```
+
+The provided YAML snippet defines a Kubernetes Deployment for deploying an instance of the Nginx web server. Let's break down the key components:
+
+- **apiVersion: apps/v1**  Specifies the Kubernetes API version for the object being created, in this case, a Deployment in the "apps" group
+
+- **Kind: Deployment**  Defines the type of Kubernetes resource being created, which is a Deployment. Deployments are used to manage the deployment and scaling of applications.
+- **Metadata:**  Contains metadata for the Deployment, including the name of the Deployment, which is set to "my-nginx-deployment."
+- **Spec:**  Describes the desired state of the Deployment.
+- **Replica: 1**  Specifies that the desired number of replicas (instances) of the Pods controlled by this Deployment is 1.
+- **Selector:**  Defines how the Deployment selects which Pods to manage. In this case, it uses the label "app: my-nginx" to match Pods.
+- **Containers:**  Defines the containers within the Pod.
+- **name: my-nginx:**  Sets the name of the container to "my-nginx."
+- **image: kelomo2502/gbnginx:1.0**  Specifies the Docker image to be used for the Nginx container. The image is "kelomo2502/gbnginx" with version "1.0."
+- **Ports:**  Specifies the port mapping for the container, and in this case, it exposes port 80.
+  3.  Create a new file called `nginx-service-yaml` and paste the content below
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-service
+spec:
+  selector:
+    app: my-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+
+
+```
+
+The provided YAML snippet defines a Kubernetes Service for exposing the Nginx application to the external world. Let's break down the key components:
+
+- **apiVersion: v1**  Specifies the Kubernetes API version for the object being created, in this case, a Service.
+- **kind:Service**  Defines the type of Kubernetes resource being created, which is a Service. Services provide a stable endpoint for accessing a set of Pods.
+- **metadata:**  Contains metadata for the Service, including the name of the Service, which is set to "my-nginx-service."
+- **spec:**   Describes the desired state of the Service.
+- **selector:**  Specifies the labels used to select which Pods the Service will route traffic to. In this case, it selects Pods with the label "app: my-nginx."
+- **ports**  Specifies the ports configuration for the Service.
+- **protocol: TCP**  Specifies the ports configuration for the Service.
+- **port: 80**  Specifies the ports configuration for the Service.
+- **targetPort: 80**  Specifies the port on the Pods to which the traffic will be forwarded.
+- **type: NodePort**  Sets the type of the Service to NodePort. This means that the Service will be accessible externally on each Node's IP address at a static port, which will be automatically assigned unless specified.
+
+## Run the command below for the deployment on the cluster
+
+`kubectl apply -f nginx-deployment.yaml`
+
+`kubectl apply -f nginx-service.yaml`
+
+## Verify your deployment
+
+`kubectl get deployments`
+
+`kubectl get services`
+
+## Access your deployment
+
+`minikube service my-nginx-service --url`

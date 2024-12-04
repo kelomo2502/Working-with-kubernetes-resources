@@ -13,8 +13,7 @@ spec:
         app: my-nginx
     spec:
       containers:
-      - name: my-nginx
-        image: kelomo2502/gbnginx:1.0
-        ports:
-        - containerPort: 80
-
+        - name: my-nginx
+          image: kelomo2502/gbnginx:1.0
+          ports:
+            - containerPort: 80
